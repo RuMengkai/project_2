@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>购物车</title>
+	<link rel="stylesheet" href="css/style.css"/>
+	<script type="text/javascript" src="libs/angular.js"></script>
+	<script type="text/javascript" src="js/cart.js"></script>
+	<script type="text/javascript" src="libs/angular-cookies.js"></script>
+</head>
+<body>
+	<div class="catbox"  ng-app="myApp" ng-controller="myCart">
+
+		<table id="cartTable">
+			<thead>
+				<tr>
+					<th><label><input class="check-all check" type="checkbox" ng-click="checkAll()" ng-model="all"/>&nbsp;全选</label></th>
+					<th>商品</th>
+					<th>单价</th>
+					<th>数量</th>
+					<th>小计</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="c in cartList">
+					<td class="checkbox"><input class="check-one check" type="checkbox" ng-model="c.check" ng-click="check()"/></td>
+					<td class="goods"><img ng-src="{{c.imgsUrl}}" alt=""/><span>{{c.goodsName}}</span></td>
+					<td class="price">{{c.price|currency}}</td>
+					<td class="count">
+						<span ng-click="reduce($index,c.goodsID)" class="reduce">-</span>
+						<input class="count-input" type="text" placeholder="请输入大于0的数"  ng-model="c.num" ng-change="change($index,c.goodsID)"/>
+						<span ng-click="add($index,c.goodsID)" class="add">+</span>
+					</td>
+					<td class="subtotal">{{c.price*c.num|currency}}</td>
+					<td class="operation"><span class="delete" ng-click="remove($index,c.goodsID)">删除</span></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="foot" id="foot">
+			<label class="fl select-all"><input type="checkbox" class="check-all check" ng-click="checkAll()" ng-model="all"/>&nbsp;全选</label>
+			<a class="fl delete" href="javascript:;"  ng-click="removeAll()">清空</a>
+			<div class="fr closing">结 算</div>
+			<div class="fr total">合计：<span>{{allSum()|currency}}</span></div>
+			<div class="fr selected" id="selected">已选商品<span id="selectedTotal" ng-bind="allNum()"></span>件<span class="arrow up">︽</span><span class="arrow down">︾</span></div>
+			<div class="selected-view">
+				<div id="selectedViewList" class="clearfix">
+					<div><img src="images/1.jpg"><span>取消选择</span></div>
+				</div>
+				<span class="arrow">aaaa<span>aaaa</span></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app = "myApp">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body ng-controller="myCtrl">
+	<select>
+		<option ng-repeat="key in cityName.regions">{{key.name}}</option>
+	</select>
+	<select>
+		<option ng-repeat="key in cityName.regions">{{key[regions][name]}}</option>
+	</select>
+</body>
+<script src="../plugins/angular/angular.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($http,$scope){
+		//请求数据初始化
+		$http.post("api/cityName.json").then(function getdata(data, status, headers, config) {
+			$scope.cityName=data.data;
+		}).catch(function(data, status, headers, config){
+			console.log("error");
+		});
+		
+	})
+</script>
+</html>

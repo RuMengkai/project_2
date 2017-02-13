@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>后台</title>
+	<meta charset="UTF-8">
+	<meta name="Author" content="rmk">
+	<link rel="stylesheet" type="text/css" href="plugins/bootstrap/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/index1.css" />
+</head>
+<body>
+	<div class="header">
+		<div class="top">
+			<ul class="lt">
+				<li>你好，<span class="a">201902  !</span></li>
+				<li>你当前拥有<span class="b">5</span>枚果币</li>
+				<li><a href="#">[  退出    ]</a></li>
+			</ul>
+			<ul class="rt">
+				<li>如需帮助，请咨询</li>
+				<li><a href="#">在线客服</a></li>
+				<li>或拨打<span>1234565</span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="logo">
+		<div class="logo_c">
+			<img src="images/1_02.png" class="bg" />
+			<div class="logo_ct">
+				<ul>
+					<li>
+						<a><img src="images/2_07.png"/></a>
+						<span>立项项目</span>
+					</li>
+					<li>
+						<a><img src="images/2_09.png"/></a>
+						<span>设计项目</span>
+					</li>
+					<li>
+						<a><img src="images/2_11.png"/></a>
+						<span>开工项目</span>
+					</li>
+				</ul>
+			</div>
+			<div class="logo_rt">
+				<ul>
+					<li><a href="#">网站首页</a></li>
+					<li><a href="#">展会展览</a></li>
+					<li><a href="#">品牌大全</a></li>
+					<li><a href="#">效果大全</a></li>
+					<li><a href="#">工程百科</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="content" ng-app="AngularApp">
+		<div class="left-menu" ng-controller="menu">
+			<ul>
+				<li ng-repeat="key in menu">
+					<span ng-click="show($event.target)" data="{{key.num}}">icon{{key["one"]}}</span>
+					<a ng-repeat="key2 in key.two" ng-mouseenter="menter($event.target)" ng-show="state" class="{{key.num}}"  href="{{key2.link}}"  >{{key2.txt}}</a>
+				</li>
+			</ul>
+		</div>
+		<div ng-view id="main"></div>
+	</div>
+	<script type="text/javascript" src="plugins/angular/angular.js"></script>
+	<script type="text/javascript" src="../plugins/angular/angular-route.js"></script>
+	<script type="text/javascript" src="plugins/jquery/jquery.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/paaword.js"></script>
+	<script type="text/javascript" src="js/contect.js"></script>
+</body>
+</html>

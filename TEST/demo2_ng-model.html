@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <input type="text" ng-model="text"/>
+        <p>{{greeting.text}}</p>
+        <img ng-src="{{src}}"/>
+    </div>
+</body>
+<script type="text/javascript" src="../libs/angular.min.js"></script>
+<script type="text/javascript">
+    var _app=angular.module("app",[]);
+    _app.controller("ctrl",function($scope){
+        $scope.greeting={
+            "text":"greeting"
+        }
+        $scope.text="Angular";
+        $scope.src="../img/banner1.jpg";
+    });
+</script>
+</html>

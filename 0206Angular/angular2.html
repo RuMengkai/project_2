@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AngularApp">
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="Author" content="rmk">
+	<link rel="stylesheet" type="text/css" href="" />
+	<script type="text/javascript" src=""></script>
+</head>
+<body>
+	<div ng-controller="firstController">
+		<input type="text" ng-model="name" name="">
+		<p ng-bind="name"></p>
+	</div>
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript">
+		var _app=angular.module('AngularApp',[]);
+		// ng-controller
+		_app.controller("firstController",function($scope) {
+		    $scope.name="aaaa";
+		});
+	</script>
+</body>
+</html>

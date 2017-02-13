@@ -1,0 +1,79 @@
+body {
+  background-color: #f4f4f4;
+  font-family: "黑体";
+}
+header {
+  font-family: "黑体";
+  display: flex;
+  background: #0097ff;
+  height: .43rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+header h1 {
+  color: #fff;
+  font-size: .19rem;
+  display: block;
+}
+header div {
+  border: 3px #fff solid;
+  width: .1rem;
+  height: .1rem;
+}
+header .left {
+  margin-right: .6rem;
+}
+header .right {
+  margin-left: .6rem;
+}
+.item {
+  font-family: "黑体";
+  height: auto;
+  overflow: hidden;
+  background-color: #fff;
+  width: 100%;
+}
+.item .row {
+  height: auto;
+  overflow: hidden;
+}
+.item .row dl {
+  float: left;
+  display: block;
+  width: 25%;
+  height: .9rem;
+  font-size: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.item .row dl dt {
+  align-self: center;
+  width: .48rem;
+  height: .48rem;
+  display: block;
+}
+.item .row dl dt img {
+  width: 100%;
+  height: 100%;
+}
+.item .row dl dd {
+  display: block;
+}
+.item .btn {
+  height: 30px;
+}
+.index-title {
+  font-family: "黑体";
+  margin-top: .1rem;
+  line-height: .35rem;
+  font-weight: 600;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  font-size: .15rem;
+  padding-left: .1rem;
+}

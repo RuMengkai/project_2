@@ -1,0 +1,19 @@
+.show {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+.comtent {
+  width: 500px;
+  height: auto;
+  margin: 20px auto;
+}
+.datalist {
+  cursor: pointer;
+  width: 100px;
+  height: 20px;
+}
+.datalist:hover {
+  background-color: #0f0;
+}

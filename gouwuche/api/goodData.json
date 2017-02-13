@@ -1,0 +1,468 @@
+[
+	{
+		"className":"衬衫",
+		"classID": 1,
+		"good":[
+			{
+				"goodsID": 1,
+				"num": 1,
+				"goodsName": "茵曼 2015秋装新款文艺长袖格子衬衫百搭长袖衬衣女",
+				"classID": 1,
+				"imgsUrl": "http://img13.360buyimg.com/n8/jfs/t1705/49/1279540754/390079/4aa81978/55ebe778Nc711e466.jpg",
+				"discount": "六",
+				"price": 199,
+				"className": "衬衫",
+				"check":true
+			},
+
+			{
+				"goodsID": 2,
+				"num": 1,
+				"goodsName": "韩都衣舍韩版2015秋装新款女装翻领绣花图案长袖衬衫",
+				"classID": 1,
+				"imgsUrl": "http://s17.mogucdn.com/p1/150919/mwent_iezton3dheywiy3cgmzdambqgyyde_1000x1500.jpg_468x468.jpg",
+				"discount": "七",
+				"price": 176,
+				"className": "衬衫",
+				"check":true
+			},
+
+			{
+				"goodsID": 3,
+				"num": 1,
+				"goodsName": "韩都衣舍长袖衬衫",
+				"classID": 1,
+				"imgsUrl": "https:////img.alicdn.com/bao/uploaded///img.alicdn.com/bao/uploaded/i4/TB1vGO5IFXXXXb4XXXXXXXXXXXX_!!0-item_pic.jpg_160x160q90.jpg",
+				"discount": "不打",
+				"price": 146,
+				"className": "衬衫",
+				"check":true
+			},
+
+			{
+				"goodsID": 4,
+				"num": 1,
+				"goodsName": "秋冬纯棉美美女衬衫",
+				"classID": 1,
+				"imgsUrl": "http://img.alicdn.com/bao/uploaded/i4/TB1QP0gJpXXXXczXpXXXXXXXXXX_!!0-item_pic.jpg_b.jpg",
+				"discount": "不打",
+				"price": 136,
+				"className": "衬衫",
+				"check":true
+
+			},
+			{
+				"goodsID": 5,
+				"num": 1,
+				"goodsName": "秋冬条纹显瘦棉质长袖女衬衫",
+				"classID": 1,
+				"imgsUrl": "http://s20.mogucdn.com/p1/150915/17d08t_ieytanlbmjqtondbgmzdambqmeyde_640x960.jpg_220x330.jpg",
+				"discount": "八打",
+				"price": 126,
+				"className": "衬衫",
+				"check":true
+
+			},
+			{
+				"goodsID": 6,
+				"num": 1,
+				"goodsName": "秋冬文艺纯棉长袖女衬衫",
+				"classID": 1,
+				"imgsUrl": "http://s16.mogucdn.com/p1/150727/14dhcd_ie2wgmrtmnqtin3bgizdambqhayde_640x960.jpg_220x330.jpg",
+				"discount": "九打",
+				"price": 146,
+				"className": "衬衫",
+				"check":true
+
+			}
+		]
+	},
+	{
+		"className": "礼服",
+		"classID": 2,
+		"good":[
+			{
+				"goodsID": 7,
+				"num": 1,
+				"goodsName": "男士修身商务正装",
+				"classID": 1,
+				"imgsUrl": "http://g-search3.alicdn.com/img/bao/uploaded/i4/i1/TB1EmgpJXXXXXbTXVXXXXXXXXXX_!!0-item_pic.jpg_180x180.jpg_.webp",
+				"discount": "六",
+				"price": 199,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 8,
+				"num": 1,
+				"goodsName": "主持人晚会礼服定制",
+				"classID": 1,
+				"imgsUrl": "http://g-search3.alicdn.com/img/bao/uploaded/i4/i2/T1B6AFFplaXXXXXXXX_!!0-item_pic.jpg_180x180.jpg_.webp",
+				"discount": "六打",
+				"price": 164,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 9,
+				"num": 1,
+				"goodsName": "西服套装男士三件套新郎结婚礼服",
+				"classID": 1,
+				"imgsUrl": "http://img.alicdn.com/bao/uploaded/i4/TB1sEHgJVXXXXXmXFXXXXXXXXXX_!!0-item_pic.jpg_b.jpg",
+				"discount": "不打",
+				"price": 126,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 10,
+				"num": 1,
+				"goodsName": "热嘉 2015秋季新款送围巾韩版纯色打底修身长袖羊毛呢连衣裙",
+				"classID": 1,
+				"imgsUrl": "http://s17.mogucdn.com/p1/151012/1gxg40_ie2dcyrqmeydomrtgqzdambqgiyde_800x1280.jpg_220x330.webp",
+				"discount": "九打",
+				"price": 136,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 11,
+				"num": 1,
+				"goodsName": "杰克琼斯西服暗纹印花修身男装",
+				"classID": 1,
+				"imgsUrl": "http://img12.360buyimg.com/n8/jfs/t1210/220/1197759086/274389/50b1f74e/557e7c26Nc3b07697.jpg",
+				"discount": "不打",
+				"price": 176,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 12,
+				"num": 1,
+				"goodsName": "女神范晚礼服长款",
+				"classID": 1,
+				"imgsUrl": "http://img14.360buyimg.com/n8/jfs/t1408/179/1096127431/135849/ffaffb2a/55bb2d91N173039db.jpg",
+				"discount": "不打",
+				"price": 136,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 13,
+				"num": 1,
+				"goodsName": "女神范晚礼服长款",
+				"classID": 1,
+				"imgsUrl": "http://img14.360buyimg.com/n8/jfs/t1408/179/1096127431/135849/ffaffb2a/55bb2d91N173039db.jpg",
+				"discount": "不打",
+				"price": 136,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 14,
+				"num": 1,
+				"goodsName": "女神范晚礼服长款",
+				"classID": 1,
+				"imgsUrl": "http://img14.360buyimg.com/n8/jfs/t1408/179/1096127431/135849/ffaffb2a/55bb2d91N173039db.jpg",
+				"discount": "不打",
+				"price": 136,
+				"className": "礼服",
+				"check":true
+
+			},
+			{
+				"goodsID": 15,
+				"num": 1,
+				"goodsName": "女神范晚礼服长款",
+				"classID": 1,
+				"imgsUrl": "http://img14.360buyimg.com/n8/jfs/t1408/179/1096127431/135849/ffaffb2a/55bb2d91N173039db.jpg",
+				"discount": "不打",
+				"price": 136,
+				"className": "礼服",
+				"check":true
+
+			}
+		]
+	},
+	{
+		"className": "棉服",
+		"classID": 3,
+		"good":[
+			{
+				"goodsID": 13,
+				"num": 1,
+				"goodsName": "大码韩版棉袄羊羔毛外套",
+				"classID": 1,
+				"imgsUrl": "https://img.alicdn.com/bao/uploaded/i4/TB1CocBJpXXXXbxXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg",
+				"discount": "六",
+				"price": 199,
+				"className": "棉服",
+				"check":true
+
+			},
+			{
+				"goodsID": 14,
+				"num": 1,
+				"goodsName": "棒球领拉链长袖插袋外套",
+				"classID": 1,
+				"imgsUrl": "http://img13.360buyimg.com/n8/jfs/t916/297/48674898/158545/289beb0a/54f517a3Nabdda4c9.jpg",
+				"discount": "不打",
+				"price": 116,
+				"className": "棉服",
+				"check":true
+
+			},
+			{
+				"goodsID": 15,
+				"num": 1,
+				"goodsName": "修身休闲短外套",
+				"classID": 1,
+				"imgsUrl": "https://g-search1.alicdn.com/img/bao/uploaded/i4/i3/TB1l1RHJFXXXXXDXVXXXXXXXXXX_!!0-item_pic.jpg_180x180.jpg_.webp",
+				"discount": "一打",
+				"price": 126,
+				"className": "棉服",
+				"check":true
+
+			},
+			{
+				"goodsID": 16,
+				"num": 1,
+				"goodsName": "2015韩国东大门女装秋冬季新款波点圆领长袖百搭卫衣",
+				"classID": 1,
+				"imgsUrl": "http://s11.mogucdn.com/p1/151004/1j0maz_iezwey3fmy4wcyjqgqzdambqgyyde_640x960.jpg_220x330.jpg",
+				"discount": "不打",
+				"price": 136,
+				"className": "棉服",
+				"check":true
+
+			},
+			{
+				"goodsID": 17,
+				"num": 1,
+				"goodsName": "韩版女式宽松套头破洞牛仔长袖连帽卫衣",
+				"classID": 1,
+				"imgsUrl": "http://s11.mogucdn.com/p1/150903/1igyd0_ie2tgn3cmq2gcnrwgmzdambqhayde_640x960.jpg_220x330.jpg",
+				"discount": "不打",
+				"price": 156,
+				"className": "棉服",
+				"check":true
+
+			},
+			{
+				"goodsID": 18,
+				"num": 1,
+				"goodsName": "波司登（BOSIDENG）羽绒服男款",
+				"classID": 1,
+				"imgsUrl": "https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/TB1zIjhJVXXXXb7XXXXXXXXXXXX_!!0-item_pic.jpg_180x180.jpg_.webp",
+				"discount": "五打",
+				"price": 166,
+				"className": "棉服",
+				"check":true
+
+			}
+		]
+	},
+	{
+		"className": "短外套",
+		"classID": 4,
+		"good":[
+			{
+				"goodsID": 19,
+				"num": 1,
+				"goodsName": "韩版女装开叉大码宽松长款套头卫衣连衣裙",
+				"classID": 1,
+				"imgsUrl": "https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/TB1RMSeJXXXXXbKXpXXXXXXXXXX_!!0-item_pic.jpg_180x180.jpg_.webp",
+				"discount": "六",
+				"price": 199,
+				"className": "短外套",
+				"check":true
+
+			},
+			{
+				"goodsID": 20,
+				"num": 1,
+				"goodsName": "2015韩国东大门女装秋冬季新款波点圆领长袖百搭卫衣 ",
+				"classID": 1,
+				"imgsUrl": "https://g-search1.alicdn.com/img/bao/uploaded/i4/i2/TB1K_zcJFXXXXapXpXXXXXXXXXX_!!0-item_pic.jpg_180x180.jpg_.webp",
+				"discount": "不七",
+				"price": 116,
+				"className": "短外套",
+				"check":true
+
+			},
+			{
+				"goodsID": 21,
+				"num": 1,
+				"goodsName": "麦诺伊2015秋装新款时尚百搭上衣圆领长袖印花加绒套头卫衣外套女",
+				"classID": 1,
+				"imgsUrl": "http://g-search3.alicdn.com/img/bao/uploaded/i4/i1/TB1FW7RJVXXXXXbXpXXXXXXXXXX_!!0-item_pic.jpg_220x220.jpg",
+				"discount": "不打",
+				"price": 126,
+				"className": "短外套",
+				"check":true
+
+			},
+			{
+				"goodsID": 22,
+				"num": 1,
+				"goodsName": "2015韩国东大门进口女装秋冬新款ZAN彩色卡通眼睛太空棉拼接卫衣",
+				"classID": 1,
+				"imgsUrl": "http://g-search3.alicdn.com/img/bao/uploaded/i4/i2/TB1WHM2JFXXXXcsXpXXXXXXXXXX_!!0-item_pic.jpg_220x220.jpg",
+				"discount": "六打",
+				"price": 136,
+				"className": "短外套",
+				"check":true
+
+			},
+			{
+				"goodsID": 23,
+				"num": 1,
+				"goodsName": "秋冬韩版连帽开衫加绒卫衣女休闲宽松长袖帽衫上衣女学生秋装外套",
+				"classID": 1,
+				"imgsUrl": " https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/TB1w2ZFJVXXXXcZXFXXXXXXXXXX_!!0-item_pic.jpg_220x220.jpg",
+				"discount": "不打",
+				"price": 146,
+				"className": "短外套",
+				"check":true
+
+			},
+			{
+				"goodsID": 24,
+				"num": 1,
+				"goodsName": "jcoolstory韩国2015秋装新款小鹿宽松长袖圆领套头卫衣女外套潮",
+				"classID": 1,
+				"imgsUrl": "https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/T1DDXdFp8aXXXXXXXX_!!0-item_pic.jpg_220x220.jpg",
+				"discount": "八",
+				"price": 156,
+				"className": "短外套",
+				"check":true
+
+			}
+		]
+	},
+	{
+		"className": "卫衣",
+		"classID": 5,
+		"good":[
+			{
+				"goodsID": 25,
+				"num": 1,
+				"goodsName": "2015新款长袖短外套",
+				"classID": 1,
+				"imgsUrl": "http://img13.360buyimg.com/n8/jfs/t1780/360/1665940755/305945/6e038dcc/5606c94fN2e9b8ab5.jpg",
+				"discount": "六",
+				"price": 199,
+				"className": "卫衣",
+				"check":true
+
+			},
+			{
+				"goodsID": 26,
+				"num": 1,
+				"goodsName": "艾格纯色时尚休闲短外套",
+				"classID": 1,
+				"imgsUrl": "http://img10.360buyimg.com/n8/jfs/t2275/236/376347547/270558/e22f689e/5602ceedNd46589ef.jpg",
+				"discount": "不打",
+				"price": 136,
+				"className": "卫衣",
+				"check":true
+
+			},
+			{
+				"goodsID": 27,
+				"num": 1,
+				"goodsName": "棒球领拉链长袖插袋外套",
+				"classID": 1,
+				"imgsUrl": "http://g-search2.alicdn.com/img/bao/uploaded/i4/i2/TB1dPGFGpXXXXXDXFXXXXXXXXXX_!!0-item_pic.jpg_220x220.jpg_.webp",
+				"discount": "八",
+				"price": 146,
+				"className": "卫衣",
+				"check":true
+
+			},
+			{
+				"goodsID": 28,
+				"num": 1,
+				"goodsName": "编织毛线翻领短外套",
+				"classID": 1,
+				"imgsUrl": "http://g-search2.alicdn.com/img/bao/uploaded/i4/i1/TB1torHJpXXXXbcXpXXXXXXXXXX_!!0-item_pic.jpg_220x220.jpg_.webp",
+				"discount": "五",
+				"price": 146,
+				"className": "卫衣",
+				"check":true
+
+			},
+			{
+				"goodsID": 29,
+				"num": 1,
+				"goodsName": "韩国显瘦时髦短外套",
+				"classID": 1,
+				"imgsUrl": "http://img14.360buyimg.com/n1/jfs/t2239/348/593607901/189359/2c679104/561cc7d0Na2785a2b.jpg",
+				"discount": "不打",
+				"price": 146,
+				"className": "卫衣",
+				"check":true
+
+			},
+			{
+				"goodsID": 30,
+				"num": 1,
+				"goodsName": "麂皮绒翻领短外套",
+				"classID": 1,
+				"imgsUrl": "http://img14.360buyimg.com/n1/jfs/t1684/199/1361456875/126264/b7e46747/55c9c31dNef9ec656.jpg",
+				"discount": "不打",
+				"price": 166,
+				"className": "卫衣",
+				"check":true
+
+			}
+		]
+	},
+	{
+		"className": "T恤",
+		"classID": 6,
+		"good":[]
+	},
+	{
+		"className": "风衣",
+		"classID": 7,
+		"good":[]
+	},
+	{
+		"className": "打底裤",
+		"classID": 8,
+		"good":[]
+	},
+	{
+		"className": "皮草",
+		"classID": 9,
+		"good":[]
+	},
+	{
+		"className": "羊绒衫",
+		"classID": 10,
+		"good":[]
+	},
+	{
+		"className": "牛仔裤",
+		"classID": 11,
+		"good":[]
+	},
+	{
+		"className": "休闲裤",
+		"classID": 12,
+		"good":[]
+	},
+	{
+		"className": "短裤",
+		"classID": 13,
+		"good":[]
+	}
+]

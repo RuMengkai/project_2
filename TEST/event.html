@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{ width:100px; height:100px; overflow:hidden; background-color:red;}
+    </style>
+    <!--<script type="text/javascript" src="../libs/angular.min.js"></script>-->
+</head>
+<body ng-controller="clickCtrl">
+    <div ng-click="click()"></div>
+</body>
+<script type="text/javascript">
+//    var _app=angular.module("app",[]);
+//    _app.controller("clickCtrl",function($scope){
+//        $scope.click=function(){
+//            alert("tip");
+//        }
+//    });
+
+    var _app={};
+    _app.controller=function(_ctrl,fn){
+        var _dom=document.getElementsByTagName("*");
+        var _current=null;
+        for(var i=0;i<_dom.length;i++){
+            if(_dom[i].getAttribute("ng-controller")==_ctrl){
+                _current=_dom[i];
+                break;
+            }
+        }
+        for(var n=0;n<_current.children.length;n++){
+            for(var t=0;t<_current.children[n].attributes.length;t++){
+                if(_current.children[n].attributes[t].nodeName=="ng-click"){
+                    _current.children[n].onclick=function(){
+                       fn();
+                       $scope.click();
+                    }
+                }
+            }
+
+        }
+    }
+    var $scope={};
+    _app.controller("clickCtrl",function(){
+        $scope.click=function(){
+            alert("tip");
+            console.log(this);
+        }
+    })
+
+
+
+</script>
+</html>

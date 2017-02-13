@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .ng-scope{
+            width:100%; height:auto; clear:both;
+        }
+        .ngClass{
+            width:100px; height:100px; background-color:red;
+        }
+        .active{ display:block; width:100px; height:100px; background-color:red;}
+        .inactive{ display:none;}
+        .ProductListCtrl{}
+    </style>
+    <script type="text/javascript" src="../libs/angular.min.js"></script>
+    <script type="text/javascript">
+        var _app=angular.module("app",[]);
+    </script>
+</head>
+<body>
+    <div ng-controller="ngClass">
+        <div class="{{c}}">1、不推荐使用，要不以后修改视图样式还得改scope</div>
+        <div ng-class="{true: 'active', false: 'inactive'}[isActive]">2、字符串数组形式。</div>
+        <div ng-class="{'selected': isSelected, 'car': isCar}">3、对象key/value处理。</div>
+    </div>
+    <script type="text/javascript">
+        /**
+         * ng-class
+         * 在angular中为我们提供了3种方案处理class：
+         * 1：scope变量绑定，如上例。（不推荐使用）
+         * 2：字符串数组形式。
+         * 3：对象key/value处理。
+         * */
+        _app.controller("ngClass",function($scope){
+            $scope.c="ngClass";
+            $scope.isActive=true;
+            $scope.isSelected=true;
+            $scope.isCar=false;
+        });
+    </script>
+
+
+
+
+
+
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+    <div ng-controller="searchByTxt">
+        <div><input type="text" ng-model="txt"/></div>
+        <div ng-repeat="key in dataList|filter:txt">{{key}}</div>
+    </div>
+    <script type="text/javascript">
+        /**
+         * 2．filter: 搜索的文本条件
+         */
+        _app.controller("searchByTxt",function($scope){
+            $scope.dataList=["zhangshan","lisi","wangwu","zhaoliu"];
+        });
+    </script>
+
+
+
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div ng-controller="ngInit">
+        <div ng-init="myText='Hello World!'">{{myText}}</div>
+    </div>
+    <script type="text/javascript">
+        /**
+         * ng-init：初始化应用程序的数据
+         * 在解释是才执行，相对比较慢
+         */
+        _app.controller("ngInit",function($scope){
+            $scope.myText="H51638";
+            console.log($scope);
+        });
+    </script>
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+
+
+
+    <div ng-controller="ngInclude">
+        <div ng-include="'include.html'"></div>
+    </div>
+    <script type="text/javascript">
+        _app.controller("ngInclude",function($scope){
+
+        })
+    </script>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+
+
+
+    <div ng-Controller="TestController">
+        <label>Name:
+            <input type="text" ng-model="name"/>
+        </label>
+        <button type="button" ng-click="greet()"/>
+    </div>
+    <script type="text/javascript">
+        /**
+         * controller as
+         */
+        _app.controller('TestController', function($scope,$window){
+            $scope.name = 'beginor';
+            $scope.greet = greet;
+            function greet() {
+                $window.alert('Hello, ' + $scope.name);
+            }
+        });
+    </script>
+
+
+
+
+
+
+    <div ng-Controller="TestController as vm">
+        <label>Name:
+            <input type="text" ng-model="vm.name" />
+        </label>
+        <button type="button" ng-click="vm.greet()"/>
+    </div>
+    <script type="text/javascript">
+        /**
+         * 在controller as 的写法当中就不能用 $scope
+         */
+        _app.controller('TestController', TestController);
+
+        TestController.$inject = ['$window'];
+
+        function TestController($window) {
+            this.name = 'beginor';
+            this.$window = $window;
+            console.log(this);
+        }
+
+        TestController.greet = function () {
+            this.$window.alert('Hello, ' + this.name);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../libs/angular.min.js"></script>
+    <script type="text/javascript" src="../libs/angular-route.min.js"></script>
+    <script type="text/javascript">
+        var _app=angular.module("app",[]);
+    </script>
+</head>
+<body>
+    <div ng-controller="HttpCtrl">
+        <form name="loginFm">
+            Name:<input ng-model="user.name"/>
+            pwd: <input ng-model="user.pwd" />
+            <input type="button" value="login" ng-click="login(user)" />
+            <input type="button" value="login1" ng-click="login1(user)" />
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        /**
+         * 在angularJS中与远程HTTP服务器交互时会用一个非常关键的服务-$http。
+         * $http是angular中的一个核心服务，利用浏览器的xmlhttprequest或者JSONP对象与远程HTTP服务器进行交互。
+         * $http的使用方式和jquery提供的$.ajax操作比较相同，均支持多种method的请求，get、post、put、delete等。
+         * $http的各种方式的请求更趋近于rest风格。
+         * 在controller中可通过与$scope同样的方式获取$http对象,e.g. function controller($scope,$http){}
+         */
+
+//        下面进行$http服务的使用说明，调用如下：
+//        $http(config).then(function(data,status,headers,config){}).catch(function(data,status,headers,config){});
+//$http({
+//    "url":"",
+//
+//});
+
+
+//        config为一个JSON对象，其中主要包含该请求的url、data、method等，
+//        如{url:"login.do",method:"post",data:{name:"12346",pwd:"123"}}。
+//        method  {String} 请求方式e.g. "GET"."POST"
+//        url {String} 请求的URL地址
+//        params {key,value} 请求参数，将在URL上被拼接成？key=value
+//        data {key,value} 数据，将被放入请求内发送至服务器
+//        cache {boolean} 若为true，在http GET请求时采用默认的$http cache，否则使用$cacheFactory的实例
+//        timeout {number} 设置超时时间
+
+//        success为请求成功后的回调函数，error为请求失败后的回调函数，
+//        这里主要是对返回的四个参数进行说明。
+//        data 响应体
+//        status 相应的状态值
+//        headers 获取getter的函数
+//        config 请求中的config对象，同上第1点
+
+//        为了方便大家与HTTP服务器进行交互，angularJS提供了各个请求方式下方法。
+//        $http.put/post(url,data,config) url、name必填，config可选
+//        $http.get/delete/jsonp/head(url,config) url必填，config可选
+//        url、data、config与$http的参数一致,
+//
+//        下面有一个simple demo用于展示如何使用$http()及$http.post()。
+
+        function HttpCtrl($http,$scope){
+            $scope.user={
+                "name":"",
+                "pwd":""
+            }
+            $scope.login = function(user){
+                $http.post("../data/demo20.json",user).then(function(data, status, headers, config){
+                    //console.log(data.data[0].fristName);
+                    $scope.user.name=data.data[0].firstName;
+                    alert("success");
+                }).catch(function(data, status, headers, config){
+                    alert("error");
+                })
+            }
+            $scope.login1 = function(user){
+                $http({
+                    url: "../demo20.json",
+                    data: user
+                }).then(function(data, status, headers, config){
+                    alert("success");
+                }).catch(function(data, status, headers, config){
+                    alert("error");
+                })
+            }
+
+        }
+        _app.controller("HttpCtrl",HttpCtrl);
+    </script>
+
+
+
+
+
+
+
+
+    <div ng-controller="ngInterval">
+        <div>{{value}}</div>
+    </div>
+    <script type="text/javascript">
+        /**
+         * $interval
+         * window.setInterval的Angular包装形式。Fn是每次延迟时间后被执行的函数。
+         * 间隔函数的返回值是一个承诺。这个承诺将在每个间隔刻度被通知，
+         * 并且到达规定迭代次数后被取消，如果迭代次数未定义，则无限制的执行。
+         * 通知的值将是运行的迭代次数。取消一个间隔，调用$interval.cancel(promise)。
+         *
+         * 备注：当你执行完这项服务后应该把它销毁。
+         * 特别是当controller或者directive元素被销毁时而$interval未被销毁。
+         * 你应该考虑到在适当的时候取消interval事件。
+         *
+         * 使用：
+         * $interval(fn,delay,[count],[invokeApply],[Pass]);
+         * fn:一个将被反复执行的函数。
+         * delay：每次调用的间隔毫秒数值。
+         * count：循环次数的数值，如果没设置，则无限制循环。
+         * invokeApply：如果设置为false，则避开脏值检查，否则将调用$apply。
+         * Pass：函数的附加参数。
+         *
+         * 方法：
+         * cancel(promise);取消与承诺相关联的任务。
+         * promise：$interval函数的返回值。
+         */
+        _app.controller("ngInterval",function($scope,$interval){
+//            var toDo = function () {
+//                $scope.value="Hello World "+(i++);
+//            };
+//            var i=0;
+//            var _promise=$interval(toDo, 3000, 10, true);
+            //$interval.cancel(_promise);
+        });
+
+        /**
+         * 备注：angularJs-脏检查
+         * scope是一个指向应用model的object，也是表达式的执行上下文。
+         * scope被放置在一个类似应用的DOM结构的层次结构中
+         * 脏检查，将原对象复制一份快照，在某个时间，比较现在对象与快照的值，
+         * 如果不一样就表明发生了变化，这个策略要保留两份变量，而且要遍历对象，比较每个属性，这样会有一定的性能问题
+         * angular使用的就是脏检查：
+         * 不会脏检查所有的对象。当对象被绑定到html中后，这个对象才会添加为检查对象（watcher）
+         * 不会脏检查所有的属性，同样当属性被绑定后，这个属性才会被列为检查的属性
+         * 在angular程序初始化时，会将绑定的对象的属性添加为监听对象（watcher），也就是说一个对象绑定了N个属性，就会添加N个watcher。
+         * angular什么时候去脏检查呢？angular所系统的方法中都会触发比较事件，
+         * 比如：controller初始化的时候，所有以ng-开头的事件执行后，都会出发脏检查
+         * 必要的时候我们要手动的触发脏检查：$apply仅仅只是进入angular context，然后通过$digest触发脏检查
+         */
+    </script>
+
+
+
+
+
+
+
+    <div ng-controller="ngTimeout">
+        <div>{{value}}</div>
+    </div>
+    <script type="text/javascript">
+        /**
+         * $timeout
+         * window.setTimeout的Angular包装形式。Fn函数包装成一个try/catch块，代表$exceptionHandler服务里的任何异常。
+         * timeout函数的返回值是一个promise，当到达设置的超时时间时，这个承诺将被解决，并执行timeout函数。
+         * 需要取消timeout，需要调用$timeout.cancel(promise);
+         *
+         * 使用：
+         * $timeout(fn,[delay],[invokeApply]);
+         * fn：一个将被延迟执行的函数。
+         * delay：延迟的时间（毫秒）。
+         * invokeApply：如果设置为false，则跳过脏值检测，否则将调用$apply。
+         *
+         * 方法：
+         * cancel(promise);
+         */
+        _app.controller("ngTimeout",function($scope,$timeout){
+//            var i=0;
+//            var toDo = function () {
+//                $scope.value="Hello World "+ (i++);
+//                $timeout(toDo,3000);
+//            };
+//            $timeout(toDo,3000);
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <div ng-controller="ngService">
+        <!--<div>{{server}}：值类型的自定义server</div>-->
+        <!--<div>{{server.factory}}：工厂方式创建的自定义server</div>-->
+        <!--<div>{{server.service}}：service方式创建的自定义server</div>-->
+        <!--<div>{{server.provider}}：供应者方式创建的自定义server</div>-->
+        <!--<div>{{server}}：Constant方式创建的自定义server</div>-->
+        <!--<div>{{server.special}}：特殊目的对象方式创建的自定义server</div>-->
+    </div>
+    <script type="text/javascript">
+        /**
+         * Ａngular JS 自定义服务
+         * 1 变量方式(value Recipe)
+         *
+         * 2 工厂方式(factory Recipe)factory方式创建的服务，作用就是返回一个有属性有方法的对象。
+         * 相当于：var f = myFactory();
+         * 在自定义服务里注入服务示例，但不能注入$scope作用域对象。
+         *
+         * 3 服务方式(service Recipe)
+         * 通过service方式创建自定义服务，相当于new的一个对象：var s = new myService();
+         * 只要把属性和方法添加到this上才可以在controller里调用。
+         *
+         * 4 供应者方式(provider Recipe)
+         * 注意：factory和service能注入内置服务，而provider是不能注入内置服务的
+         * 只有provder是能传 .config() 函数的 service。如果想在 service 对象启用之前，先进行模块范围的配置，
+         * 那就应该选择 provider。需要注意的是：在config函数里注入provider时，名字应该是：providerName+Provider.
+         * 使用Provider的优点就是，你可以在Provider对象传递到应用程序的其他部分之前在app.config函数中对其进行修改。
+         * 当你使用Provider创建一个service时，唯一的可以在你的控制器中访问的属性和方法是通过$get()函数返回内容。
+         *
+         * 5 常量方式（Constant Recipe）
+         * 6 特殊目的对象（Special Purpose Objects）
+         */
+
+        //使用value来定义
+        //_app.value("myServer","123,4");
+
+
+
+        //工厂方式(factory Recipe)
+//        _app.factory("myServer",function(){
+//            return {
+//                "factory":"this is factory"
+//            }
+//        });
+
+
+
+        //服务方式(service Recipe)
+//        _app.service("myServer",function(){
+//            this.service = "service";
+//        });
+
+
+
+        //供应者方式(provider Recipe)
+        _app.provider('myServer', function() {
+            var name="";
+            var test={"a":1,"b":2};
+            //注意的是，setter方法必须是(set+变量首字母大写)格式
+            this.setName = function(newName){
+                name = newName
+            }
+
+            this.$get =function($http,$q){
+                return {
+                    "lastName":name,
+                    "test":test
+                }
+            }
+
+        });
+        //需要注意的是：在注入provider时，名字应该是：providerName+Provider
+        _app.config(function(myServerProvider){
+            myServerProvider.setName("大圣");
+        });
+
+
+        //常量方式（Constant Recipe）
+        //_app.constant("myServer","9876");
+
+        _app.controller("ngService",function(myServer,$scope){
+            console.log(myServer);
+            //$scope.server=myServer;
+        });
+    </script>
+
+
+
+
+    <div ng-controller="ngRoute">
+
+    </div>
+    <script type="text/javascript">
+        /**
+         * ngRoute
+         * 在 AngularJS 中，关于路由的设计和用法是一个很重要的方面。
+         * 简单来说AngularJS的路由其实是一种纯前端的解决方案。
+         * 不同于后端路由，它的本质其实是：当请求一个url时，根据路由配置匹配这个url，然后请求模板片段，并插入到 ng-view 中去。
+         * 所以从某种意义上来说，AngularJS的路由更加倾向通过改变url来进行页面的局部刷新。
+         *
+         * 使用 ngRoute 需要额外加载这个模块文件，就像下面这样
+         * <script type="text/javascript" src="../libs/angular-route.min.js">
+         * 除了 angular-route 模块，还有 angular-animate ， anglar-aria ， angular-cookies
+         * 等模块在使用时也需要额外引入相关文件。
+         * 这地方有点小坑，大家注意一下就可以了。
+         *
+         *
+         *
+         * ngRoute 模块中包含以下内容，
+         * 名称------------------属性-----------------作用
+         * ngView---------------DIRECTIVE------------提供不同路由模板插入的视图层
+         * $routeProvider-------PROVIDER—------------提供路由配置
+         * $route---------------SERVICE-—------------用于构建各个路由的url、view、controller这三者的关系
+         * $routeParams---------SERVICE-—------------解析返回路由中带有的参数
+         *
+         * 上表中的每一个组件在路由中都扮演着不可或缺的作用。基本上使用AngularJS配置路由的基本流程是这样的：
+         * 1、在主模板中使用 ngView 定义一个路由模板的视图层。不同路由对应的模板将会插入到这个 ngView 所在的dom元素下。
+         * 2、使用 $routeProvider 进行路由配置，包括每一个路由对应的url，template以及controller。除了这些基本的配置之外，还会有一些额外的配置，比如 resolve 配置等。
+         * 3、在每个路由的controller中完成对应的业务逻辑。
+         * 4、可以通过注入 $routeParams 服务来获取路由url上的参数；还可以通过 $rootScope 来监控 $routeChangeStart 和 $routeChangeSuccess 事件。
+         */
+
+        //简单实例
+        //在实例代码 仓库 中有一个 route 文件夹，其目录结构如下，
+        /**
+         * index.html 是我们的主页面文件，其内容如下，
+         * home.html
+         * post.html
+         * about.html
+         * index.js
+         */
+        _app.controller("ngRoute",function(){});
+    </script>
+</body>
+</html>

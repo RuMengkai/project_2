@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<title>angular server</title>
+	<meta charset="UTF-8">
+	<meta name="Author" content="rmk">
+	<link rel="stylesheet" type="text/css" href="" />
+    <script type="text/javascript" src="../plugins/angular/angular.js"></script>
+    <!-- <script type="text/javascript" src="../libs/angular-route.min.js"></script> -->
+    <script type="text/javascript">
+        var _app=angular.module("app",[]);
+    </script>
+</head>
+<body>
+	<div ng-controller="ngService">
+		<!--<div>{{server}}：值类型的自定义server</div>-->
+		<!-- <div>{{server.factory}}：工厂方式创建的自定义server</div> -->
+		<!-- <div>{{server.abc}}：service方式创建的自定义server</div> -->
+		<div>{{server.lastName}}：{{server.sex}}；供应者方式创建的自定义server</div>
+		<!--<div>{{server}}：Constant方式创建的自定义server</div>-->
+		<!--<div>{{server.special}}：特殊目的对象方式创建的自定义server</div>-->
+	</div>
+	<script type="text/javascript">
+        /**
+         * Ａngular JS 自定义服务
+         * 1 变量方式(value Recipe)
+         *
+         * 2 工厂方式(factory Recipe)factory方式创建的服务，作用就是返回一个有属性有方法的对象。
+         * 相当于：var f = myFactory();
+         * 在自定义服务里注入服务示例，但不能注入$scope作用域对象。
+         *
+         * 3 服务方式(service Recipe)
+         * 通过service方式创建自定义服务，相当于new的一个对象：var s = new myService();
+         * 只要把属性和方法添加到this上才可以在controller里调用。
+         *
+         * 4 供应者方式(provider Recipe)
+         * 注意：factory和service能注入内置服务，而provider是不能注入内置服务的
+         * 只有provder是能传 .config() 函数的 service。如果想在 service 对象启用之前，先进行模块范围的配置，
+         * 那就应该选择 provider。需要注意的是：在config函数里注入provider时，名字应该是：providerName+Provider.
+         * 使用Provider的优点就是，你可以在Provider对象传递到应用程序的其他部分之前在app.config函数中对其进行修改。
+         * 当你使用Provider创建一个service时，唯一的可以在你的控制器中访问的属性和方法是通过$get()函数返回内容。
+         *
+         * 5 常量方式（Constant Recipe）
+         * 6 特殊目的对象（Special Purpose Objects）
+         */
+
+        //使用value来定义
+        //_app.value("myServer","123,4");
+
+
+
+        //工厂方式(factory Recipe)
+       // _app.factory("myServer",function(){
+       //     return {
+       //         "factory":"this is factory"
+       //     }
+       // });
+
+
+
+        //服务方式(service Recipe)
+       // _app.service("myServer",function(){
+       //     this.abc = "service";
+       // });
+
+
+
+        //供应者方式(provider Recipe) 可以用来做配置
+        _app.provider('myServer', function() {
+        	var name="";
+        	var test={"a":1,"b":2};
+        	var sex="男";
+            //注意的是，setter方法必须是(set+变量首字母大写)格式
+            this.setName = function(newName){
+            	name = newName;
+            }
+            this.setSex = function(newSex){
+            	sex = newSex;
+            }
+
+            this.$get =function($http,$q){
+            	return {
+            		"lastName":name,
+            		"test":test,
+            		"sex":sex
+            	}
+            }
+
+        });
+        //需要注意的是：在注入provider时，名字应该是：providerName+Provider
+        _app.config(function(myServerProvider){
+        	myServerProvider.setSex("女");
+        	myServerProvider.setName("大圣");
+        });
+       
+
+
+        //常量方式（Constant Recipe）
+        //_app.constant("myServer","9876");
+
+        _app.controller("ngService",function(myServer,$scope){
+        	console.log(myServer);
+            $scope.server=myServer;
+        });
+    </script>
+</body>
+</html>

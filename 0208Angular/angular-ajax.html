@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript" src="../plugins/angular/angular.js"></script>
+	<!-- <script type="text/javascript" src="../plugins/angular/angular-route.js"></script> -->
+	<script type="text/javascript">
+		var _app=angular.module("app",[]);
+	</script>
+</head>
+<body>
+	<div ng-controller="HttpCtrl">
+		<div ng-repeat="img in imgresource">{{img}}</div>
+		<div class="show"></div>
+		<button ng-click="show()">图片</button>
+	</div>
+	<div ng-controller="se">{{sevalue}}:这是一个值定义的server</div>
+	<script type="text/javascript">
+		function HttpCtrl($http,$scope){
+			$scope.show = function(){
+				$http.post("api/img.json").then(function(data, status, headers, config){
+                   	$scope.imgresource=data.data;
+                   	console.log($scope.imgresource);
+                	console.log("success");
+                }).catch(function(data, status, headers, config){
+                	console.log("error");
+                })
+            }
+        }
+        _app.controller("HttpCtrl",HttpCtrl);
+        //值定义server
+        _app.value("$myse","rmk");
+        _app.controller("se",function($myse,$scope) {
+        	console.log($myse);
+        	$scope.sevalue=$myse;
+        })
+    </script>
+</body>
+</html>

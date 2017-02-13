@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<title>搜索框</title>
+	<meta charset="UTF-8">
+	<meta name="Author" content="rmk">
+	<link rel="stylesheet" type="text/css" href="css/serach.css" />
+	<link rel="stylesheet" type="text/css" href="../0206HouTai/css/common.css">
+	<script type="text/javascript" src="../plugins/angular/angular.js"></script>
+	<script type="text/javascript" src="../plugins/jquery/jquery.js"></script>
+	<script type="text/javascript">
+		_app=angular.module("app",[]);
+	</script>
+</head>
+<body>
+	<div ng-controller="search" class="comtent">
+		<input id="search" type="text" ng-focus="focus" ng-model="txt"><a href="https://www.baidu.com/s?wd={{txt}}">百度一下</a>
+		<p class="datalist" ng-class="{'true':'show', 'false':'hidden'}[state]" ng-repeat="key in dataList|filter:txt">{{key}}</p>
+	</div>
+	<script type="text/javascript">
+		_app.controller("search",function($scope){
+			$scope.dataList=["zhangshan","lisi","wangwu","zhaoliu","suiqi","宋妮斯","茹孟凯","王清云","李舒蕊"];
+			$scope.state=false;
+			$("#search").focus(function() {
+				$scope.state=true;
+			});
+			// $(".comtent").on("click",".datalist", function() {
+			// 	$scope.txt=$(this).html();
+			// });
+		});
+		// $(".datalist").css("display","none");
+		// $("#search").focus(function() {
+		// 	$(".datalist").css("display","block");
+		// });
+		$(".comtent").on("click",".datalist", function() {
+			$("#search").val($(this).html());
+			$(".datalist").css("display","none");
+		});	
+	</script>
+</body>
+</html>

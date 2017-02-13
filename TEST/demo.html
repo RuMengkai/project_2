@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .increaseNum{
+            display:block;
+            width:100px; height:100px; overflow:hidden;
+            background-color:red;
+        }
+        .sh{ width:100px; height:100px; background-color:#ccc;}
+    </style>
+    <script type="text/javascript" src="../libs/angular.min.js"></script>
+    <script type="text/javascript">
+        var _app = angular.module('app', []);
+    </script>
+</head>
+<body>
+<div ng-controller="ctrlNext">
+    <p ng-repeat="key in names">{{key}} {{lastname}}</p>
+</div>
+<div ng-controller="ctrlPrev">
+    <p ng-repeat="key in names">{{lastname}} {{key}}</p>
+</div>
+<script type="text/javascript">
+    //$rootScope.lastname = "Refsnes";//全局作用域
+    /** 使用多个控制器与全局的$rootScope*/
+    //一个应用程序可以有多个controller
+    //$index：使用ng-repeat的时候会产生的一个记录索引，在使用过滤器的时候会产生bug，使用时请注意
+    _app.controller('ctrlNext', function($scope, $rootScope) {
+        $scope.names = ["Emil", "Tobias", "Linus"];//作用域，作用域仅限于当前控制器
+        $scope.lastname = "Refsnes";//根作用域|全局作用域
+    });
+    _app.controller('ctrlPrev', function($scope,$rootScope) {
+        console.log(arguments.length);
+//        $scope.names = ["EmilPrev", "TobiasPrev", "LinusPrev"];//局部作用域
+//        $rootScope.lastname = "Refsnes2";
+    });
+
+
+//依赖注入：顾名思义就是用的时候才会注入该模块;
+
+
+//    var _angular={
+//        "$scope":{},
+//        "$rootScope":{},
+//        "abc":{}
+//    };
+//    var _json={
+//        adv:10
+//    }
+//
+//
+//    function main($scope,$rootScope){
+//        alert(i);
+//    }
+//    function controller(fn){
+//        var _fn=fn.toString();
+//        console.log(_fn);
+//        var _params=["$scope","$rootScope"];
+//        var _temp=[];
+//
+//
+//        for(var i=0;i<_params.length;i++){
+//            for(var key in _angular){
+//                if(_params[i]==key){
+//                    _temp.push(_params[i]);
+//                }
+//            }
+//        }
+//        if(_params.length==2){
+//            fn(_angular[_temp[0]],_angular[_temp[1]]);
+//        }else{
+//            fn(_angular[_temp[0]]);
+//        }
+//
+//    }
+//    controller(main);
+
+
+
+
+
+
+
+
+</script>
+
+
+
+---------------------------------------------------------------------------------------------
+<div ng-controller="ngClick">
+    <span ng-click="click($event)" class="increaseNum">{{num}}</span>
+</div>
+<div ng-controller="ngMouseOver">
+    <span ng-mouseover="mouseover($event)" class="mouseover">{{num}}</span>
+</div>
+<script type="text/javascript">
+    //1．ng-click     ng-click="countLikeNum(user,$index)"
+    _app.controller("ngClick",function($scope){
+        $scope.num=0;
+        $scope.click=function(e){
+            //console.log(e);//原生事件对象，实参：$event
+            $scope.num+=1;
+            //console.log(this);
+            //这里的this并不会指向DOM节点，因为angular中不建议用户操作DOM，
+            //所以这里this指向的是：$scope对象
+            //angular事件系统并不与浏览器的事件相通，
+            //我们只能在作用域上监听angular事件而不是DOM事件
+        }
+    });
+    _app.controller("ngMouseOver",function($scope){
+        $scope.num=0;
+        $scope.mouseover=function(e){
+            $scope.num=$scope.num+1;
+            console.log(this);
+        }
+    });
+</script>
+
+
+
+
+
+
+————————————————————————————————————————————————————————————————
+<form name="test">
+    <div ng-controller="Parent">
+        这里是父级Div
+        <div ng-controller="Self">
+            这里是子级SelfDiv
+            <input type="button" ng-click="toParent()" value="向ParentDiv传播事件" />
+            <input type="button" ng-click="toChild()" value="向ChildDiv传播事件" />
+            <div ng-controller="Child">
+                这里是子级ChildDiv
+                <input type="button" ng-click="toTop()" value="向上传播事件" />
+            </div>
+        </div>
+        <div ng-controller="Borther">
+            这里是Self的兄弟BortherDiv
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    /**
+     * 事件介绍：
+     * angularjs中不用作用域之间可以通过组合使用$broadcast,$emit,$on的事件广播机智来进行通信
+     * $broadcast的作用是将事件从父级作用域传播到子级作用域，包括自己。格式：$broadcast(eventName,args);
+     * $emit的作用是将事件从子级作用域传播到父级作用域，直到根作用域。包括自己。格式：$emit(eventName,args);
+     * $on的作用：用于作用域中监控从子级或者父级作用域中传播的事件以及相应的数据。格式：$on(event,data)
+     * 上述说明中，eventName是需要监控的事件名称，$on方法中的参数event是事件的相关对象，data是事件传播的数据
+
+     * $on的方法中的event事件，有如下的属性和方法
+     * 事件属性/方法---------------------功能说明
+     * event.targetScope-----------------获取传播事件的作用域
+     * event.currentScope----------------获取接受事件的作用域
+     * event.name------------------------传播事件的名称
+     * event.stopPropagation()-----------阻止事件进行冒泡传播，仅在$emit事件中有效
+     * event.preventDefault()------------阻止传播事件的发生
+     * event.defaultPrevented------------如果调用preventDefault事件则返回true
+     */
+    //控制器Self
+    _app.controller("Self", function ($scope,$window) {
+        //button的传播事件
+        $scope.toParent = function () {
+            //注册一个向上传播的事件，eventName:'FromSelf', data:oneObject
+            $scope.$emit("FromSelf", { divName: "Self", description: "向父传播数据" });
+        };
+        $scope.toChild = function () {
+            //注册一个向下传播的事件，eventName:'FromSelf', data:oneObject
+            $scope.$broadcast("FromSelf", { divName: "Self", description: "向子传播数据" });
+        };
+        $scope.name = "Self";
+        $scope.$on("FromChild", function (event, data) {
+            $window.alert("当前节点" + event.currentScope.name + "截获到了来自" + data.divName + "的事件：" + event.name + "，它的作用是" + data.description);
+        });
+
+    });
+    //控制器Parent
+    _app.controller("Parent", function ($scope, $window) {
+
+        $scope.name = "Parent";
+        //$on用于事件
+        $scope.$on("FromSelf", function (event, data) {
+            $window.alert("当前节点" + event.currentScope.name + ",截获到了来自" + data.divName + "的事件：" + event.name + "，它的作用是" + data.description);
+        });
+        $scope.$on("FromChild", function (event, data) {
+            $window.alert("当前节点" + event.currentScope.name + ",截获到了来自" + data.divName + "的事件：" + event.name + "，它的作用是" + data.description);
+        });
+
+    });
+    //控制器Child
+    _app.controller("Child", function ($scope, $window) {
+        $scope.name = "Child";
+        //$on用于截获来自父级作用域的事件
+        $scope.$on("FromSelf", function (event, data) {
+            $window.alert("当前节点" + event.currentScope.name +"截获到了来自" + data.divName + "的事件：" + event.name + "，它的作用是" + data.description);
+        });
+
+        //button的传播事件
+        $scope.toTop = function () {
+            //注册一个向上传播的事件，eventName:'FromChild', data:oneObject
+            $scope.$emit("FromChild", { divName: "Child", description: "向上播数据" });
+        };
+
+    });
+    _app.controller("Borther",function($scope,$window){
+
+    });
+</script>
+
+
+
+
+-----------------------------------------------------------------------------------------------
+<div ng-controller="ngHide">
+    <div class="sh" ng-hide="isHide">hide</div>
+</div>
+<script type="text/javascript">
+    //2．ng-hide
+    _app.controller("ngHide",function($scope){
+        $scope.isHide=false;
+    });
+</script>
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------
+<div ng-controller="ngShow">
+    <div class="sh" ng-show="isShow">show</div>
+</div>
+<script type="text/javascript">
+    //3．ng-show
+    _app.controller("ngShow",function($scope){
+        $scope.isShow=true;
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------
+<div ng-controller="ngFilter">
+    <div>{{maps.num}}</div>
+    <div>{{maps.num|currency}}</div>
+    <div>{{maps.num|currency:'￥'}}</div>
+    <br/>
+    <br/>
+    <div>{{maps.list}}</div>
+    <div>{{maps.list|filter:"a"}}</div>
+    <div>{{maps.list|filter:"a"|orderBy:"age"}}</div>
+    <br/>
+    <br/>
+    <div ng-repeat="key in maps.list|orderBy:'age'">{{key}}</div>
+    <div>{{money}}</div>
+    <br/>
+    <br/>
+    <div>{{str|date:"yyyy-MM-dd hh:mm:ss"}}</div>
+</div>
+<script type="text/javascript">
+    //4．filter过滤器
+    /**
+     * 过滤器（filter）正如其名，作用就是接收一个输入，通过某个规则进行处理，
+     * 然后返回处理后的结果。主要用在数据的格式化上，例如获取一个数组中的子集，
+     * 对数组中的元素进行排序等。ng内置了一些过滤器，它们是：currency(货币)、
+     * date(日期)、filter(子串匹配)、json(格式化json对象)、limitTo(限制个数)、
+     * lowercase(小写)、uppercase(大写)、number(数字)、orderBy(排序)。
+     * 总共九种。除此之外还可以自定义过滤器，这个就强大了，可以满足任何要求的数据处理。
+     *
+     * 过滤器的内容非常简单，只要明白了内置的如何使用，
+     * 自己如何定义一个filter就OK了~今天系统的学习了下，下面做个介绍。
+     */
+
+    /**
+     * filter的两种使用方法
+     * 1、在模板中使用filter
+     * 我们可以直接在{{}}中使用filter，跟在表达式后面用 | 分割，语法如：{{ expression | filter }}
+     * <div>{{maps.num|currency}}</div>
+     *
+     *
+     * 也可以多个filter连用，上一个filter的输出将作为下一个filter的输入（怪不得这货长的跟管道一个样。。）
+     * {{ expression | filter1 | filter2 | ... }}
+     *
+     *
+     * filter可以接收参数，参数用 : 进行分割，如：{{ expression | filter:argument1:argument2:... }}
+     * <div>{{maps.num|currency:'￥'}}</div>
+     * <div>{{maps.list|filter:"a"|orderBy:"age"}}</div>
+     *
+     *
+     * 除了对{{}}中的数据进行格式化，我们还可以在指令中使用filter，
+     * 例如先对数组array进行过滤处理，然后再循环输出：
+     * <div ng-bind="">{{maps.list|orderBy:"age"}}</div>
+     *
+     * 2. 在controller和service中使用filter
+     * 我们的js代码中也可以使用过滤器，方式就是我们后面要学的依赖注入，
+     * 例如我要在controller中使用currency过滤器，只需将它注入到该controller中即可，代码如下：
+     * app.controller('ngFilter',function($scope,currencyFilter){
+     *      $scope.num = currencyFilter(123534);
+     * }
+     */
+    _app.controller("ngFilter",function($scope,$filter){
+        $scope.maps={
+            "num":100,
+            "list":[{
+                "name":"zhangsan",
+                "age":3
+            },{
+                "name":"lisi",
+                "age":8
+            },{
+                "name":"wangwu",
+                "age":5
+            },{
+                "name":"zhaoliu",
+                "age":1
+            }],
+        }
+        $scope.str=new Date();
+        $scope.money=$filter("currency")(1890,"￥");//在controller和service中使用filter
+    });
+
+
+    /**
+     * ng的内置过滤器：共九种
+     * 1. currency (货币处理) 使用currency可以将数字格式化为货币，默认是美元符号，你可以自己传入所需的符号，例如我传入人民币：
+     * {{num | currency : '￥'}}
+     *
+     *
+     * 2. date (日期格式化)原生的js对日期的格式化能力有限，ng提供的date过滤器基本可以满足一般的格式化要求。用法如下：
+     * {{date | date : 'yyyy-MM-dd hh:mm:ss EEEE'}}
+     *
+     *
+     * 3. filter(匹配子串)
+     * 这个名叫filter的filter（不得不说这名字起的，真让人容易混淆——！）用来处理一个数组，
+     * 然后可以过滤出含有某个子串的元素，作为一个子数组来返回。可以是字符串数组，也可以是对象数组。
+     * 如果是对象数组，可以匹配属性的值。它接收一个参数，用来定义子串的匹配规则。
+     * 下面举个例子说明一下参数的用法，我用现在特别火的几个孩子定义了一个数组：
+     *
+     *
+     *
+     * 4. json(格式化json对象)
+     * json过滤器可以把一个js对象格式化为json字符串，没有参数。这东西有什么用呢，
+     * 我一般也不会在页面上输出一个json串啊，
+     * 官网说它可以用来进行调试，嗯，是个不错的选择。或者，也可以用在js中使用，
+     * 作用就和我们熟悉的JSON.stringify()一样。用法超级简单：
+     * {{ jsonTest | json}}
+     *
+     *
+     * 5. limitTo(限制数组长度或字符串长度)
+     * limitTo过滤器用来截取数组或字符串，接收一个参数用来指定截取的长度，
+     * 如果参数是负值，则从数组尾部开始截取。
+     * {{ childrenArray | limitTo : 2 }}  //将会显示数组中的前两项
+     *
+     *
+     * 6. lowercase(小写)
+     *
+     *
+     * 7. uppercase(大写)
+     *
+     *
+     * 8. number(格式化数字)
+     * number过滤器可以为一个数字加上千位分割，像这样，123,456,789。同时接收一个参数，可以指定float类型保留几位小数：
+     * {{ num | number : 2 }}
+     *
+     *
+     * 9. orderBy(排序)
+     * orderBy过滤器可以将一个数组中的元素进行排序，接收一个参数来指定排序规则，参数可以是一个字符串，
+     * 表示以该属性名称进行排序。可以是一个函数，定义排序属性。
+     * 还可以是一个数组，表示依次按数组中的属性值进行排序（若按第一项比较的值相等，再按第二项比较），
+     * 还是拿上面的孩子数组举例：
+     * <div>{{ childrenArray | orderBy : 'age' }}</div>      //按age属性值进行排序，若是-age，则倒序
+     * <div>{{ childrenArray | orderBy : orderFunc }}</div>   //按照函数的返回值进行排序
+     * <div>{{ childrenArray | orderBy : ['age','name'] }}</div>  //如果age相同，按照name进行排序
+     */
+</script>
+
+
+
+
+
+<div ng-controller="customFilter">
+    <div>自定一个过滤器，用于过滤后显示数组中的所有偶数：{{arr|oddItem}}</div>
+</div>
+<script type="text/javascript">
+    /**
+     * 自定义过滤器:
+     * filter的自定义方式也很简单，使用module的filter方法，返回一个函数，该函数接收输入值，
+     * 并返回处理后的结果。
+     * 话不多说，我们来写一个看看。
+     * 比如我需要一个过滤器，它可以返回一个数组中下标为奇数的元素，代码如下：
+     */
+    _app.filter('oddItem',function(){
+        return function(inputArray){//inputArray从哪传递进来的
+            var array = [];
+            for(var i=0;i<inputArray.length;i++){
+                if(inputArray[i]%2!==0){
+                    array.push(inputArray[i]);
+                }
+            }
+            return array;
+        }
+    });
+    _app.controller("customFilter",function($scope){
+        $scope.arr=[1,2,3,4,5,6];
+    });
+
+    /**
+     * 格式就是这样，你的处理逻辑就写在内部的那个闭包函数中。
+     * 你也可以让自己的过滤器接收参数，参数就定义在return的那个函数中，作为第二个参数，或者更多个参数也可以。
+     */
+</script>
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------
+<div ng-controller="ngSort">
+    <ol>
+        <li ng-repeat="item in maps | orderBy:'age':desc">
+            <ul>
+                <li>name:<span ng-bind="item.name"></span></li>
+                <li>age:<span ng-bind="item.age"></span></li>
+                <li>tall:<span ng-bind="item.tall"></span></li>
+            </ul>
+        </li>
+    </ol>
+</div>
+<script type="text/javascript">
+    //5．sort排序
+    _app.controller("ngSort",function($scope){
+        $scope.sort="age";
+        $scope.desc=true;
+        $scope.maps=[{
+            "name": "zhangsan",
+            "age": 3,
+            "tall":180
+        }, {
+            "name": "lisi",
+            "age": 8,
+            "tall":181
+        }, {
+            "name": "wangwu",
+            "age": 5,
+            "tall":183
+        }, {
+            "name": "zhaoliu",
+            "age": 1,
+            "tall":182
+        }];
+    });
+</script>
+</body>
+</html>

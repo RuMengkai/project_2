@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        console.log(Object.prototype);
+        //var _fn=new Function();
+        function fn(a,b,c){
+            console.log(arguments);
+        }
+        fn((function(){ return 0,1,2;})());
+
+        var _fn=fn.toString();
+        var _param=_fn.substr(_fn.indexOf("("),_fn.indexOf("){"));
+
+        var _obj={"name":"zs"};
+        _fn="function(_objx,"+_obj+"){alert(_objx.name);}";
+//        var _json=window.eval("("+"{'name':123}"+")");
+//        console.log(_json);
+
+
+        var _fx=window.eval("("+_fn+")");
+        window.eval("_fx(_obj,)");
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

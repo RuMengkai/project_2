@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app = "myApp">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body ng-controller="myCtrl">
+	<select ng-change="envets.province(provinceValue)" ng-model="provinceValue">
+		<option value="{{key.id}}" ng-repeat="key in cityName.regions">{{key.name}}</option>
+	</select>
+	<select ng-change="envets.county(cityValue)" ng-model="cityValue">
+		<option value="{{key.id}}" ng-repeat="key in city">{{key.name}}</option>
+	</select>
+	<select ng-model="lala">
+		<option ng-repeat="key in county">{{key.name}}</option>
+	</select>
+</body>
+<script src="../plugins/angular/angular.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var app = angular.module("myApp",[]);
+	app.controller("myCtrl",function($http,$scope){
+		$scope.city={};
+		$scope.county={};
+		//请求数据初始化
+		$http.post("api/cityName.json").then(function getdata(data, status, headers, config) {
+			$scope.cityName=data.data;
+		}).catch(function(data, status, headers, config){
+			console.log("error");
+		});
+		$scope.envets={
+			province:function(id) {
+				console.log(id);
+				for (var key in $scope.cityName.regions) {
+					if ($scope.cityName.regions[key]["id"]==id) {
+						$scope.city=$scope.cityName.regions[key]["regions"];
+						$scope._key=key;//保存城市
+					}
+				}
+				console.log($scope.city);
+			},
+			county:function(id) {
+				console.log(id);
+				for (var key in $scope.cityName.regions[$scope._key].regions) {
+					if ($scope.cityName.regions[$scope._key].regions[key]["id"]==id) {
+						$scope.county=$scope.cityName.regions[$scope._key].regions[key]["regions"];
+					}
+				}
+				console.log($scope.county);
+			},
+			defult:function(id) {
+				console.log(id);
+			}
+		}
+	})
+</script>
+</html>

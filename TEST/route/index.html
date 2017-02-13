@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../../plugins/angular/angular.js"></script>
+    <script type="text/javascript" src="../../plugins/angular/angular-route.js"></script>
+    <script type="text/javascript">
+        var _app=angular.module("app",['ngRoute']);
+        _app.config(function($routeProvider){
+            $routeProvider.when("/home",{
+                templateUrl:"home.html",
+                controller:"HomeController"
+            }).when("/about",{
+                templateUrl:"about.html",
+                controller:"AboutController"
+            }).when("/post",{
+                templateUrl:"post.html",
+                controller:"PostController"
+            })
+        })
+    </script>
+    <script type="text/javascript" src="route/home.js"></script>
+    <script type="text/javascript" src="route/about.js"></script>
+    <script type="text/javascript" src="route/post.js"></script>
+</head>
+<body>
+<a href="#!/home">home</a>
+<a href="#!/about">about</a>
+<a href="#!/home">post</a>
+<hr>
+<div ng-view></div>
+</body>
+</html>

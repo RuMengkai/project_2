@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AngularApp">
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="Author" content="rmk">
+	<link rel="stylesheet" type="text/css" href="" />
+	<script type="text/javascript" src=""></script>
+</head>
+<body>
+	<!-- {{{"name":"rmk"}.name}} -->
+	<div ng-controller="firstController">
+		<p ng-model="greeting.text">Angular</p>
+	</div>
+	<div ng-controller="myCtrl">
+		<img ng-src={{src}}>
+	</div>
+
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript">
+		// 实例化
+		var _app=angular.module('AngularApp',[]);
+		// ng-controller
+		_app.controller("firstController",function($scope) {
+		    $scope.greeting={
+		    	"text":"hello"
+		    }
+		});
+		// ng-src
+		_app.controller("myCtrl",function($scope) {
+			 $scope.src="img/banner1.jpg";
+		})
+	</script>
+</body>
+</html>
